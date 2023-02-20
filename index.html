@@ -6,12 +6,32 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script>
   
-   function sendResponse(){
+  async function sendResponse(){
      
      let Approver_response = document.getElementById('select').value;
 
      alert("Response Sent "+Approver_response)
-   
+
+     let headers ={
+      "Content-type":"application/json"
+     }
+
+      let raw ={
+        Approver_response_data:Approver_response
+      }
+     let options ={
+         method:"POST",
+         headers:headers,
+         body:JSON.stringify(raw)
+
+     }
+
+     let url ="https://hooks4.freshworks.com/dvuJiyGlPRcI4wfYeEa6NXAdJ008SPe6eS6Vp3gWhJCukSByWsLT%2BQR5Wyd%2BpEPC0vMj0A%3D%3D";
+
+     await fetch(url,options)
+     .then(res=>JSON.parse())
+     .then(result =>console.log(result))
+     .catch(err =>console.log(err))
    }
 
     
